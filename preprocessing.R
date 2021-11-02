@@ -1,7 +1,7 @@
 data <- read.csv("full.csv", header = TRUE)
 
 ## Remove irrelevant columns
-data <- subset(data, select = -c(X))
+data <- subset(data, select = -c(X, id))
 
 ## Remove rows with missing data
 data <- na.omit(data)
