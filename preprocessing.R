@@ -3,6 +3,9 @@ data <- read.csv("full.csv", header = TRUE)
 ## Remove irrelevant columns
 data <- subset(data, select = -c(X))
 
+## Remove rows with missing data
+data <- na.omit(data)
+
 ## Train-test split
 N <- nrow(data)
 n.train <- round(0.75*N)
