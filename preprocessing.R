@@ -1,5 +1,12 @@
 data <- read.csv("full.csv", header = TRUE)
 
+## Remove irrelevant columns
+data <- subset(data, select = -c(X, id))
+
+## Remove rows with missing data
+data <- na.omit(data)
+
+## Train-test split
 N <- nrow(data)
 n.train <- round(0.75*N)
 n.test <- N - n.train
@@ -10,5 +17,5 @@ test.idx <- sample(1:N, size = n.test)
 data.train <- data[-test.idx,]
 data.test <- data[test.idx,]
 
-write.csv(data.train, "train.csv")
-write.csv(data.test, "test.csv")
+write.csv(data.train, "train.csv", row.names = FALSE)
+write.csv(data.test, "test.csv", row.names = FALSE)
