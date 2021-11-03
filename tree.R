@@ -1,12 +1,9 @@
 ###############################################################-
 ## package                                                 ####
 ###############################################################-
-rm(list=ls())
 library(randomForest)
 library(ggplot2)
 library(dplyr)
-library(progress)
-library(shiny)
 
 ###############################################################-
 ## data                                                    ####
@@ -37,11 +34,27 @@ best.mtry <- tab.mtry %>% filter(OOBError==min(OOBError)) %>% .$mtry
 ## Grow the RF -----------------------------------------------
 run.rf <- function(){
   ptm <- proc.time()
-  rf.train <<- randomForest(satisfaction~., data=train, mtry=best.mtry, ntree=500)
+  rf.train <<- randomForest(satisfaction~., 
+                            data=train, 
+                            mtry=best.mtry, 
+                            ntree=500,
+                            importance=TRUE)
   rf.time <<- proc.time()-ptm
   print(rf.time)
 }
 run.rf()
 
-rf.train
-rf.time
+rf.train # random forest
+rf.time  # computing time
+
+# Importance 
+rf.train$importance 
+varImpPlot(rf.train)
+# common variables in each top 5:
+# inflight wifi service, online boarding, type of travel. 
+
+# The more the accuracy/Gini of the random forest decreases 
+# due to the exclusion of a single variable,
+# the more important that variable is deemed.
+
+
