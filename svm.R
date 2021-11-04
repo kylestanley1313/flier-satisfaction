@@ -5,8 +5,13 @@ test <- read.csv('test.csv', header = TRUE, stringsAsFactors = TRUE)
 
 
 ## Fitting
+start <- Sys.time()
 fit.svm <- svm(satisfaction ~ ., data = train, kernel = 'polynomial', degree = 3, cost = 10, probability = TRUE)
-
+end <- Sys.time()
+sprintf(
+  "Fitting time: %s seconds", 
+  round(as.numeric(end - start, units = 'secs'), 3)
+)
 
 ## Preliminary evaluation
 pred.test.svm <- predict(fit.svm, newdata = test) 

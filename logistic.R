@@ -47,7 +47,7 @@ fit.lasso <- glmnet(X.train, y.train, alpha = 1, family = 'binomial')
 end <- Sys.time()
 sprintf(
   "Fitting time: %s seconds", 
-  round(end - start, 3)
+  round(as.numeric(end - start, units = 'secs'), 3)
 )
 plot(fit.lasso, xvar = 'lambda')
 
