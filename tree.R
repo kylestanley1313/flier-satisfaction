@@ -60,7 +60,7 @@ varImpPlot(rf.train)
 # the more important that variable is deemed.
 
 ## testing ----------------------------------------------------
-# predcition
+# prediction
 rf.pred <- predict(rf.train, newdata=x.test)
 rf.pred.prob <- predict(rf.train, newdata=x.test, type='prob')
 
@@ -69,7 +69,7 @@ tab.test <- table( as.factor(y.test), as.factor(rf.pred))
 tab.test
 
 ###############################################################-
-## Model evaluatoin                                        ####
+## Model evaluation                                        ####
 ###############################################################-
 ## computing time ---------------------------------------------
 rf.time 
