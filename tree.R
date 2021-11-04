@@ -82,20 +82,21 @@ rf.time
 (error <- 1-correct)
 
 ## ROC curve --------------------------------------------------
-# train
-rf.roc.train <- roc(y.train, rf.train$votes[,2])
-plot(rf.roc.train, main='ROC curve for train')
-auc(rf.roc.train) # 0.9912
-
-# test
-rf.roc.test<-roc(y.test, rf.pred.prob[,2])
-plot(rf.roc.test, main='ROC curve for test')
-auc(rf.roc.test) # 0.9931
-
-## another ROC curves to draw both
 library(ROSE)
-roc.curve(y.train, rf.train$votes[,2], col='black', lty=1, lwd=2)
+roc.curve(y.train, rf.train$votes[,2], col='black', lty=1, lwd=2, main='Random Forest')
 roc.curve(y.test, rf.pred.prob[,2], col='red', lty=2, lwd=2,add=TRUE)
-legend("bottomright", c("train", "test"), 
+legend("bottomright", c('train', 'test'), 
        col=c('black', 'red'), lty=1:2, lwd=2)
+
+# library(pROC)
+# # train
+# rf.roc.train <- roc(y.train, rf.train$votes[,2])
+# plot(rf.roc.train, main='ROC curve for train')
+# auc(rf.roc.train) # 0.9912
+# 
+# # test
+# rf.roc.test<-roc(y.test, rf.pred.prob[,2])
+# plot(rf.roc.test, main='ROC curve for test')
+# auc(rf.roc.test) # 0.9931
+
           
