@@ -75,10 +75,10 @@ tab.test
 rf.time 
 
 ## classification error----------------------------------------
-## correct rate: 0.96
+## correct rate: 0.958
 (correct <- ((tab.test %>% diag() %>% sum())/length(y.test)) %>% round(.,3))
 
-## error rate: 0.04
+## error rate: 0.042
 (error <- 1-correct)
 
 ## ROC curve --------------------------------------------------
