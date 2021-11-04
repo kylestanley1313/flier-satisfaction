@@ -83,8 +83,9 @@ rf.time
 
 ## ROC curve --------------------------------------------------
 library(ROSE)
-roc.curve(y.train, rf.train$votes[,2], col='black', lty=1, lwd=2, main='Random Forest')
-roc.curve(y.test, rf.pred.prob[,2], col='red', lty=2, lwd=2,add=TRUE)
+roc.curve(y.train, rf.train$votes[,2], col='black', lty=1, lwd=2, 
+          main='Random Forest') # AUC: 0.991
+roc.curve(y.test, rf.pred.prob[,2], col='red', lty=2, lwd=2,add=TRUE) # AUC:0.993 
 legend("bottomright", c('train', 'test'), 
        col=c('black', 'red'), lty=1:2, lwd=2)
 
