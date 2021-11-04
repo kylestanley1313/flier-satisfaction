@@ -9,7 +9,7 @@ test <- read.csv("test.csv", header = TRUE, stringsAsFactors = TRUE)
 # NOTE: 1 --> satisfied, 0 --> neutral or dissatisfied
 
 glm.fit <- glm(
-  satisfaction ~ . - id,
+  satisfaction ~ .,
   data = train,
   family = binomial
 )
