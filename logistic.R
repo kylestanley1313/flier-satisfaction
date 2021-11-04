@@ -1,4 +1,5 @@
 library(glmnet)
+library(ROSE)
 
 train <- read.csv("train.csv", header = TRUE, stringsAsFactors = TRUE)
 test <- read.csv("test.csv", header = TRUE, stringsAsFactors = TRUE)
@@ -81,31 +82,11 @@ lasso.coef
 
 ## Computing time --> see above
 
-## Classification error rate -- see above
+## Classification error rate --> see above
 
-## ROC curves
-prob.cutoffs <- seq(0, 1, by = 0.01)
-FPR.train <- rep(NA, length(prob.cutoffs))
-TPR.train <- rep(NA, length(prob.cutoffs))
-FPR.test <- rep(NA, length(prob.cutoffs))
-TPR.test <- rep(NA, length(prob.cutoffs))
-
-for (i in 1:length(prob.cutoffs)) {
-  
-  lasso.preds.test <- rep('neutral or dissatisfied', nrow(test))
-  lasso.preds.test[lasso.probs.test > prob.cutoffs[i]] = 'satisfied'
-  FPR.test[i] <- sum(lasso.preds.test == 'satisfied' & y.test != 'satisfied') / sum(y.test != 'satisfied')
-  TPR.test[i] <- sum(lasso.preds.test == 'satisfied' & y.test == 'satisfied') / sum(y.test == 'satisfied')
-  
-  lasso.preds.train <- rep('neutral or dissatisfied', nrow(train))
-  lasso.preds.train[lasso.probs.train > prob.cutoffs[i]] = 'satisfied'
-  FPR.train[i] <- sum(lasso.preds.train == 'satisfied' & y.train != 'satisfied') / sum(y.train != 'satisfied')
-  TPR.train[i] <- sum(lasso.preds.train == 'satisfied' & y.train == 'satisfied') / sum(y.train == 'satisfied')
-  
-}
-
-plot(FPR.train, TPR.train, type = 'line', xlab = "FPR", ylab = "TPR", main = "Logistic Regression ROC")
-lines(FPR.test, TPR.test, col = 'red')
-legend(0.8, 0.2, legend = c("train", "test"), lty = c(1, 1), col = c('black', 'red'))
+## ROSE ROC Curves
+roc.curve(train$satisfaction, lasso.probs.train, col = 'black', lty = 1, lwd = 2, main = "Logistic Regression")
+roc.curve(test$satisfaction, lasso.probs.test, col = 'red', lty = 2, lwd = 2, add = TRUE)
+legend("bottomright", c("train", "test"), col = c('black', 'red'), lty = 1:2, lwd = 2)
 
 
