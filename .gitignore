@@ -3,5 +3,6 @@
 .RData
 .Ruserdata
 .Rproj
+.DS_Store
 *scratch.r
 *scratch.R
