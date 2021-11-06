@@ -75,7 +75,7 @@ lasso.coef <- predict(fit.lasso, type = 'coefficients', s = bestlam)
 lasso.coef
 ## NOTES: 
 ##    - Slightly more interpretable model as LASSO removes Gate.location and Departure.Delay.in.Minutes
-##    - Same correct classification rate as baseline model (0.837)
+##    - Same correct classification rate as baseline model (0.873)
 
 
 ## Model Evaluation ------------------------------------------------------------
@@ -88,5 +88,7 @@ lasso.coef
 roc.curve(train$satisfaction, lasso.probs.train, col = 'black', lty = 1, lwd = 2, main = "Logistic Regression")
 roc.curve(test$satisfaction, lasso.probs.test, col = 'red', lty = 2, lwd = 2, add = TRUE)
 legend("bottomright", c("train", "test"), col = c('black', 'red'), lty = 1:2, lwd = 2)
+## AUC Train: 0.926
+## AUC Test: 0.928
 
 

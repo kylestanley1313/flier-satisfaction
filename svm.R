@@ -31,6 +31,8 @@ prob.test.svm <- attr(prob.test.svm, 'probabilities')[1:nrow(test)]
 roc.curve(train$satisfaction, prob.train.svm, col = 'black', lty = 1, lwd = 2, main = "SVM")
 roc.curve(test$satisfaction, prob.test.svm, col = 'red', lty = 2, lwd = 2, add = TRUE)
 legend("bottomright", c("train", "test"), col = c('black', 'red'), lty = 1:2, lwd = 2)
+## AUC Train: 0.993
+## AUC Test: 0.984
 
 
 ## NOTE: This commented out code takes a VERY long time to run. I decided 
