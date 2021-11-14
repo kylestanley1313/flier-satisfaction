@@ -90,5 +90,3 @@ roc.curve(test$satisfaction, lasso.probs.test, col = 'red', lty = 2, lwd = 2, ad
 legend("bottomright", c("train", "test"), col = c('black', 'red'), lty = 1:2, lwd = 2)
 ## AUC Train: 0.926
 ## AUC Test: 0.928
-
-
