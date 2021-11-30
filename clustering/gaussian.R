@@ -8,22 +8,43 @@ class <- data$Class
 X <- subset(data, select = -c(Class))
 
 ## Globals
-class.map <- c('Business' = 2, 'Eco' = 1, 'Eco Plus' = 3)
+class.map <- c('Business' = 1, 'Eco' = 2, 'Eco Plus' = 3)
+Gs <- 2:5
+trials <- 5
+ARI <- matrix(NA, nrow = trials, ncol = length(Gs))
 
-## G = 2
-mod2 <- Mclust(X, G = 2)
-summary(mod2)
-adj.rand.index(class.map[as.character(class)], mod2$classification)
+## Cluster
+set.seed(1)
+for (G in Gs) {
+  for (t in 1:trials) {
+    print(sprintf("G = %s, trial = %s", G, t))
+    mod <- Mclust(X, G = G)
+    ARI[t,G-1] <- adj.rand.index(class.map[as.character(class)], mod$classification)
+  }
+}
 
-## G = 3
-mod3 <- Mclust(X, G = 3)
-summary(mod3)
-adj.rand.index(class.map[as.character(class)], mod2$classification)
+colMeans(ARI)
 
-## G = 4
-mod4 <- Mclust(X, G = 4)
-summary(mod4)
-adj.rand.index(class.map[as.character(class)], mod2$classification)
+
+# ## G = 2
+# mod2 <- Mclust(X, G = 2)
+# summary(mod2)
+# adj.rand.index(class.map[as.character(class)], mod2$classification)
+# 
+# ## G = 3
+# mod3 <- Mclust(X, G = 3)
+# summary(mod3)
+# adj.rand.index(class.map[as.character(class)], mod3$classification)
+# 
+# ## G = 4
+# mod4 <- Mclust(X, G = 4)
+# summary(mod4)
+# adj.rand.index(class.map[as.character(class)], mod4$classification)
+# 
+# ## G = 5
+# mod5 <- Mclust(X, G = 5)
+# summary(mod5)
+# adj.rand.index(class.map[as.character(class)], mod5$classification)
 
 
 
