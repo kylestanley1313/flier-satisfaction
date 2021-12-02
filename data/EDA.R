@@ -122,6 +122,7 @@ X.pca <- prcomp(X, center = TRUE, scale. = TRUE, rank. = 2)
 
 par(mfrow=c(1,1))
 plot(x.pca, col=class, main='Class')
+temp$Class
 # It is hard to do clustering
 
 ## Class ------------------------------
@@ -133,5 +134,11 @@ p7 <- p+geom_boxplot(aes(Class,Flight.Distance));p7
 p8 <- p+geom_boxplot(aes(Class,Age));p8
 
 # plot to use
+
+plot(x.pca, col=class, main='Class')
+legend('topright', legend = c('Business','Eco Plus','Eco'),
+       pch=c(1,1,1),
+       col=c('black','red','green'))
+
 plot1 <- grid.arrange(p2,p10,p7,p8, nrow=2, ncol=2);plot1
 
