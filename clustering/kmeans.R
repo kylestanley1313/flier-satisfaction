@@ -1,3 +1,4 @@
+
 ###############################################################-
 ## package                                                 ####
 ###############################################################-
@@ -55,7 +56,7 @@ plot(k.values, wss_values,
 ## Run kmeans with different initializations
 # Fix k=3 and change nstart(initial assignment)
 k <- 3
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x, centers = k, nstart)$cluster
@@ -87,7 +88,7 @@ plot(n.values, ARI,
 # When k=2 ------------------------------------------------
 # Fix k=2 and change nstart(initial assignment)
 k <- 2
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x, centers = k, nstart)$cluster
@@ -114,7 +115,7 @@ plot(n.values, ARI2,
 # When k=3 ------------------------------------------------ 
 # Fix k=3 and change nstart(initial assignment)
 k <- 3
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x, centers = k, nstart)$cluster
@@ -141,7 +142,7 @@ plot(n.values, ARI3,
 # When k=4 ------------------------------------------------ 
 # Fix k=4 and change nstart(initial assignment)
 k <- 4
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x, centers = k, nstart)$cluster
@@ -168,7 +169,7 @@ plot(n.values, ARI4,
 # When k=5 ------------------------------------------------ 
 # Fix k=5 and change nstart(initial assignment)
 k <- 5
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x, centers = k, nstart)$cluster
@@ -195,7 +196,7 @@ plot(n.values, ARI5,
 # When k=6 ------------------------------------------------ 
 # Fix k=6 and change nstart(initial assignment)
 k <- 6
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x, centers = k, nstart)$cluster
@@ -233,7 +234,7 @@ x.pca <- X.pca$x
 # When k=2 ------------------------------------------------
 # Fix k=2 and change nstart(initial assignment)
 k <- 2
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x.pca, centers = k, nstart)$cluster
@@ -260,7 +261,7 @@ plot(n.values, ARI2,
 # When k=3 ------------------------------------------------ 
 # Fix k=3 and change nstart(initial assignment)
 k <- 3
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x.pca, centers = k, nstart)$cluster
@@ -287,7 +288,7 @@ plot(n.values, ARI3,
 # When k=4 ------------------------------------------------ 
 # Fix k=4 and change nstart(initial assignment)
 k <- 4
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x.pca, centers = k, nstart)$cluster
@@ -314,7 +315,7 @@ plot(n.values, ARI4,
 # When k=5 ------------------------------------------------ 
 # Fix k=5 and change nstart(initial assignment)
 k <- 5
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x.pca, centers = k, nstart)$cluster
@@ -341,7 +342,7 @@ plot(n.values, ARI5,
 # When k=6 ------------------------------------------------ 
 # Fix k=6 and change nstart(initial assignment)
 k <- 6
-n.values <- 1:15
+n.values <- 1:10
 
 cluster.output <- function(nstart){
   kmeans(x.pca, centers = k, nstart)$cluster
