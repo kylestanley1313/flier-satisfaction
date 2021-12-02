@@ -9,8 +9,8 @@ class <- data$Class
 X <- subset(data, select = -c(Class))
 
 ## Globals
-Gs <- 2:5
-trials <- 1
+Gs <- 2:6
+trials <- 10
 ARI <- matrix(NA, nrow = trials, ncol = length(Gs))
 
 ## Cluster
