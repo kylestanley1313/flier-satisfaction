@@ -11,17 +11,18 @@ library(gridExtra)  # griding ggplot2
 ## data                                                    ####
 ###############################################################-
 #setwd('/Users/chaegeunsong/GitHub/flier-satisfaction')
-data <- read.csv("data/train.csv", header = TRUE, stringsAsFactors = TRUE)
+data <- read.csv("data/full_num.csv", header = TRUE, stringsAsFactors = TRUE)
 class <- data$Class                   # response(label)
 X <- subset(data, select = -c(Class)) # predictors
+x <- X
 
 ## class mapping
-class.map <- c('Business' = 2, 'Eco' = 1, 'Eco Plus' = 3)
-trueclass <- class.map[as.character(class)]
+# class.map <- c('Business' = 2, 'Eco' = 1, 'Eco Plus' = 3)
+# class <- class.map[as.character(class)]
 
 ## turn categorical variables to numerical variables
-x <- sapply(X, as.numeric)
-x <- as.data.frame(x)
+# x <- sapply(X, as.numeric)
+# x <- as.data.frame(x)
 
 ###############################################################-
 ## K-Means                                                ####
@@ -41,6 +42,7 @@ k.values <- 1:6
 set.seed(1)
 wss_values <- map_dbl(k.values, wss)
 
+par(mfrow=c(1,1))
 plot(k.values, wss_values,
      type="b", pch = 19, frame = FALSE, 
      xlab="Number of clusters K",
@@ -64,13 +66,11 @@ set.seed(1)
 cluster.values <- lapply(n.values, cluster.output)
 
 cluster.values[[2]] %>% table()
-trueclass %>% table()
-class %>% table()
 
 # calculate adjusted rand index(ARI)
 ARI <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI
 
@@ -80,7 +80,7 @@ plot(n.values, ARI,
      xlab="Number of initial assignment",
      ylab="ARI values",
      main="Adjusted rand index(ARI)")
-# At k=3, it is same except when nstarat=1
+# At k=3, it varies and stable when nstarat>=6
 # At different k, it varies a lot
 
 ## 2-----------------------------------------------------------
@@ -100,7 +100,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI2 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI2[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI2[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI2
 
@@ -127,7 +127,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI3 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI3[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI3[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI3
 
@@ -154,7 +154,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI4 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI4[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI4[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI4
 
@@ -181,7 +181,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI5 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI5[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI5[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI5
 
@@ -208,7 +208,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI6 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI6[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI6[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI6
 
@@ -246,7 +246,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI2 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI2[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI2[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI2
 
@@ -273,7 +273,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI3 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI3[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI3[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI3
 
@@ -300,7 +300,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI4 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI4[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI4[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI4
 
@@ -327,7 +327,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI5 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI5[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI5[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI5
 
@@ -354,7 +354,7 @@ cluster.values <- lapply(n.values, cluster.output)
 # calculate adjusted rand index(ARI)
 ARI6 <- rep(NA, max(n.values))
 for(i in n.values){
-  ARI6[i] <- adj.rand.index(trueclass, cluster.values[[i]])
+  ARI6[i] <- adj.rand.index(class, cluster.values[[i]])
 }
 ARI6
 
@@ -380,12 +380,12 @@ k6.pca <- kmeans(x.pca, centers = 6, nstart = 10)
 
 
 par(mfrow=c(2,3))
-plot(x.pca, col=trueclass)
-plot(x.pca, col=k2.pca$cluster)
-plot(x.pca, col=k3.pca$cluster)
-plot(x.pca, col=k4.pca$cluster)
-plot(x.pca, col=k5.pca$cluster)
-plot(x.pca, col=k6.pca$cluster)
+plot(x.pca, col=class, main='True')
+plot(x.pca, col=k2.pca$cluster, main='k=2')
+plot(x.pca, col=k3.pca$cluster, main='k=3')
+plot(x.pca, col=k4.pca$cluster, main='k=4')
+plot(x.pca, col=k5.pca$cluster, main='k=5')
+plot(x.pca, col=k6.pca$cluster, main='k=6')
 
 # p2.pca <- fviz_cluster(k2.pca, geom = "point",  data = x) + ggtitle("k = 2")
 # p3.pca <- fviz_cluster(k3.pca, geom = "point",  data = x) + ggtitle("k = 3")
