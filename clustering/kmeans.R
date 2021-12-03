@@ -110,7 +110,7 @@ plot(n.values, ARI2,
      type="b", pch = 19, frame = FALSE, 
      xlab="Number of initial assignment",
      ylab="ARI values",
-     main="Adjusted rand index(ARI) with k=2")
+     main="Adjusted rand index(ARI) with K=2")
 
 # When k=3 ------------------------------------------------ 
 # Fix k=3 and change nstart(initial assignment)
@@ -137,7 +137,7 @@ plot(n.values, ARI3,
      type="b", pch = 19, frame = FALSE, 
      xlab="Number of initial assignment",
      ylab="ARI values",
-     main="Adjusted rand index(ARI) with k=3")
+     main="Adjusted rand index(ARI) with K=3")
 
 # When k=4 ------------------------------------------------ 
 # Fix k=4 and change nstart(initial assignment)
@@ -164,7 +164,7 @@ plot(n.values, ARI4,
      type="b", pch = 19, frame = FALSE, 
      xlab="Number of initial assignment",
      ylab="ARI values",
-     main="Adjusted rand index(ARI) with k=4")
+     main="Adjusted rand index(ARI) with K=4")
 
 # When k=5 ------------------------------------------------ 
 # Fix k=5 and change nstart(initial assignment)
@@ -191,7 +191,7 @@ plot(n.values, ARI5,
      type="b", pch = 19, frame = FALSE, 
      xlab="Number of initial assignment",
      ylab="ARI values",
-     main="Adjusted rand index(ARI) with k=5")
+     main="Adjusted rand index(ARI) with K=5")
 
 # When k=6 ------------------------------------------------ 
 # Fix k=6 and change nstart(initial assignment)
@@ -218,7 +218,7 @@ plot(n.values, ARI6,
      type="b", pch = 19, frame = FALSE, 
      xlab="Number of initial assignment",
      ylab="ARI values",
-     main="Adjusted rand index(ARI) with k=6")
+     main="Adjusted rand index(ARI) with K=6")
 
 ## Compare
 mean(ARI2);mean(ARI3);mean(ARI4);mean(ARI5);mean(ARI6);
@@ -382,11 +382,11 @@ k6.pca <- kmeans(x.pca, centers = 6, nstart = 10)
 
 par(mfrow=c(2,3))
 plot(x.pca, col=class, main='True')
-plot(x.pca, col=k2.pca$cluster, main='k=2')
-plot(x.pca, col=k3.pca$cluster, main='k=3')
-plot(x.pca, col=k4.pca$cluster, main='k=4')
-plot(x.pca, col=k5.pca$cluster, main='k=5')
-plot(x.pca, col=k6.pca$cluster, main='k=6')
+plot(x.pca, col=k2.pca$cluster, main='K=2')
+plot(x.pca, col=k3.pca$cluster, main='K=3')
+plot(x.pca, col=k4.pca$cluster, main='K=4')
+plot(x.pca, col=k5.pca$cluster, main='K=5')
+plot(x.pca, col=k6.pca$cluster, main='K=6')
 
 # p2.pca <- fviz_cluster(k2.pca, geom = "point",  data = x) + ggtitle("k = 2")
 # p3.pca <- fviz_cluster(k3.pca, geom = "point",  data = x) + ggtitle("k = 3")
