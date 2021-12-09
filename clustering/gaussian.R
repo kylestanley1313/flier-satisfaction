@@ -23,6 +23,6 @@ for (G in Gs) {
   }
 }
 
-colMeans(ARI)
+round(colMeans(ARI), 3)
 
 
