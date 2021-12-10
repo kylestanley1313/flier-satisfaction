@@ -1,4 +1,8 @@
 ###############################################################-
+## EDA for classification                                  ####
+###############################################################-
+
+###############################################################-
 ## package                                                 ####
 ###############################################################-
 library(ggplot2)
@@ -18,9 +22,6 @@ x.train <- train %>% select(-satisfaction)
 y.test <- test$satisfaction
 x.test <- test %>% select(-satisfaction)
 
-###############################################################-
-## data                                                    ####
-###############################################################-
 temp <- train # copy the train
 names(temp)
 temp %>% str()
@@ -86,11 +87,58 @@ plot3 <- ggplot(tb, aes(Online.boarding, Freq,
 grid.arrange(p3,p11,p7,p8, nrow=2, ncol=2)
 grid.arrange(plot2, plot3, nrow=2, ncol=1)
 
-## correlation mat
+###############################################################-
+## EDA for clustering                                      ####
+###############################################################-
+
+###############################################################-
+## data                                                    ####
+###############################################################-
+data <- read.csv("data/full_num.csv", header = TRUE, stringsAsFactors = TRUE)
+class <- data$Class                   # response(label)
+X <- subset(data, select = -c(Class)) # predictors
+
+# Change class variable from number to character
+temp <- data # copy the data
+
+temp2 <- read.csv("data/full.csv", header = TRUE, stringsAsFactors = TRUE)
+temp2 <- subset(temp2, select = -c(X, id))
+temp2 <- na.omit(temp2)
+
+temp$Class <- temp2$Class
 
 
+## transform data into appropirate form for plotting-----------
+temp$Satisfied <- temp$satisfactionsatisfied %>% as.factor()
+temp$Inflight.wifi.service <- temp$Inflight.wifi.service %>%  as.factor()
+temp$Online.boarding <- temp$Online.boarding %>%  as.factor()
+temp$Cleanliness <- temp$Cleanliness %>% as.factor()
+temp$Food.and.drink <- temp$Food.and.drink %>% as.factor()
+temp$Seat.comfort <- temp$Seat.comfort %>% as.factor()
 
 
+## PCA -----------------------------------------------
+X.pca <- prcomp(X, center = TRUE, scale. = TRUE, rank. = 2)
 
+par(mfrow=c(1,1))
+plot(x.pca, col=class, main='Class')
+temp$Class
+# It is hard to do clustering
 
+## Class ------------------------------
+p <- ggplot(temp, aes(Class))
+
+p2 <- p+geom_bar(aes(fill=Satisfied),position="fill");p2
+p10 <- p+geom_bar(aes(fill=Cleanliness),position="fill");p10
+p7 <- p+geom_boxplot(aes(Class,Flight.Distance));p7
+p8 <- p+geom_boxplot(aes(Class,Age));p8
+
+# plot to use
+
+plot(x.pca, col=class, main='Class')
+legend('topright', legend = c('Business','Eco Plus','Eco'),
+       pch=c(1,1,1),
+       col=c('black','red','green'))
+
+plot1 <- grid.arrange(p2,p10,p7,p8, nrow=2, ncol=2);plot1
 
