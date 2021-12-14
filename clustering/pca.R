@@ -33,7 +33,7 @@ mod5 <- Mclust(X.pca$x, G = 5)
 mod6 <- Mclust(X.pca$x, G = 6)
 
 par(mfrow = c(2, 3))
-plot(X.pca$x, col = class, main = "Truth")
+plot(X.pca$x, col = class, main = "True")
 plot(X.pca$x, col = mod2$classification, main = "K = 2")
 plot(X.pca$x, col = mod3$classification, main = "K = 3")
 plot(X.pca$x, col = mod4$classification, main = "K = 4")
